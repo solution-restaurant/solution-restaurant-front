@@ -15,7 +15,7 @@ const testModule = {
   actions: {
     getTestId({ state, commit }) {
       console.log(state.testId);
-      // commit('SET_TEST_ID', testApi.axiosTestApi()); // 서버 생성 후 테스트 230521 KJT
+      commit('SET_TEST_ID', testApi.axiosTestApi()); // 서버 생성 후 테스트 230521 KJT
     }
   },
   modules: {
