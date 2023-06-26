@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Dashboard</a>
+      <a class="navbar-brand watermelon_font" href="#">현마카세</a>
       <button type="button"
               class="navbar-toggler navbar-toggler-right"
               :class="{toggled: $sidebar.showSidebar}"
@@ -15,48 +15,14 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end">
         <ul class="nav navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-toggle="dropdown">
-              <i class="nc-icon nc-palette"></i>
-            </a>
-          </li>
-          <base-dropdown tag="li">
-            <template slot="title">
-              <i class="nc-icon nc-planet"></i>
-              <b class="caret"></b>
-              <span class="notification">5</span>
-            </template>
-            <a class="dropdown-item" href="#">Notification 1</a>
-            <a class="dropdown-item" href="#">Notification 2</a>
-            <a class="dropdown-item" href="#">Notification 3</a>
-            <a class="dropdown-item" href="#">Notification 4</a>
-            <a class="dropdown-item" href="#">Another notification</a>
-          </base-dropdown>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nc-icon nc-zoom-split"></i>
-              <span class="d-lg-block">&nbsp;Search</span>
-            </a>
-          </li>
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              Account
-            </a>
-          </li>
-          <base-dropdown title="Dropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something</a>
-            <div class="divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-          </base-dropdown>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a @click="goLogoutSubmit" class="nav-link" v-if="cookie" id="loginT">
               Log out
+            </a>
+            <a @click="goLogoutSubmit" class="nav-link" v-else id="loginF">
+              Log in
             </a>
           </li>
         </ul>
@@ -67,17 +33,50 @@
 <script>
   export default {
     computed: {
+      checkLogin: function() {
+        return this.$store.state.loginModule.user;
+      },
       routeName () {
         const {name} = this.$route
         return this.capitalizeFirstLetter(name)
+      },
+      cookie(){
+        return localStorage.getItem("Login");
       }
+    },
+    watch: {
     },
     data () {
       return {
-        activeNotifications: false
+        userName: null,
+        activeNotifications: false,
+      }
+    },
+    created() {
+      if(this.$route.params.userName){
+        this.userName = this.$route.params.userName;
+        this.sid = this.userName;
+      }else{
+        this.userName = this.$store.state.loginModule.user;
       }
     },
     methods: {
+      goLogoutSubmit() {
+        if (this.userName) {
+          this.userName = null;
+          localStorage.removeItem("Login");
+          //요약 해서 db저장 여기 구현
+          this.$store.dispatch("loginModule/logout",this.userName);//action 실행
+          this.$router.push({
+            name: "User",
+          });
+          console.log(this.$store.state.loginModule.user);
+        }else{          
+          this.$router.push({
+          name: "User"
+        });
+        }
+      },
       capitalizeFirstLetter (string) {
         return string.charAt(0).toUpperCase() + string.slice(1)
       },
@@ -98,5 +97,7 @@
 
 </script>
 <style>
-
+.watermelon_font{
+  font-family: 'watermelon';
+}
 </style>

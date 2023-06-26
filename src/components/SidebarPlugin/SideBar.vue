@@ -5,7 +5,7 @@
        :data-image="backgroundImage">
     <div class="sidebar-wrapper">
       <div class="logo">
-        <a href="#" class="simple-text logo__container">
+        <a href="#" class="simple-text logo__container watermelon_font">
             <div class="logo-img">
                 <img src="img/vue-logo.png" alt="">
             </div>
@@ -43,7 +43,7 @@
     props: {
       title: {
         type: String,
-        default: 'Vue LBD'
+        default: '현마카세'
       },
       backgroundColor: {
         type: String,
@@ -100,4 +100,7 @@
  .sidebar .sidebar-wrapper .logo .logo__container {
    padding-left: 10px;
  }
+ .watermelon_font{
+    font-family: 'watermelon';
+  }
 </style>

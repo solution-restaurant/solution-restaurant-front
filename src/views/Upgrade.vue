@@ -82,9 +82,9 @@
 </script>
 <style lang="scss">
   .upgrade-table-btn {
-    width: 160px;
+    width: 130px;
     &:first-child {
-      margin-right: 10px;
+      margin-right: 1px;
     }
   }
 </style>

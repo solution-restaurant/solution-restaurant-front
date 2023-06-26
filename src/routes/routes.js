@@ -5,6 +5,7 @@ import NotFound from '../views/NotFoundPage.vue'
 // Admin views
 import Overview from 'src/views/Overview.vue'
 import UserProfile from 'src/views/UserProfile.vue'
+import UserJoin from 'src/views/UserJoin.vue'
 import TableList from 'src/views/TableList.vue'
 import Typography from 'src/views/Typography.vue'
 import Icons from 'src/views/Icons.vue'
@@ -33,6 +34,11 @@ const routes = [
         path: 'user',
         name: 'User',
         component: UserProfile
+      },
+      {
+        path: 'user-join',
+        name: 'UserJoin',
+        component: UserJoin
       },
       {
         path: 'table-list',

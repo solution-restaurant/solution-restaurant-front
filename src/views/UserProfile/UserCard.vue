@@ -20,7 +20,7 @@
       <button href="#" class="btn btn-simple"><i class="fa fa-google-plus-square"></i></button>
     </div>
   </card>
-</template>
+</template> 
 <script>
   import Card from 'src/components/Cards/Card.vue'
   export default {

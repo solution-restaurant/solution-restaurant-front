@@ -1,116 +1,91 @@
 <template>
   <div class="content">
-    <div class="container-fluid">
-      <card>
-        <div class="row">
-          <div class="col-md-6">
-            <h5>Notifications Style</h5>
-            <div class="alert alert-info">
-              <span>This is a plain notification</span>
-            </div>
-            <div class="alert alert-info">
-              <button type="button" aria-hidden="true" class="close" data-dismiss="alert">
-                <i class="nc-icon nc-simple-remove"></i>
+    <div v-if="userName != null">
+      <div class="chat__header ">
+          안녕하세요. {{ userName }}님! 영양코칭AI '현마카세'입니다!
+          식단 추천을 받고 싶은 경우 '식단 추천'이라고 보내주세요!
+      </div>
+      <chat-list :msgs="msgData" :myName="myName"></chat-list>
+      <chat-form @submitMessage="sendMessage"></chat-form>
+    </div>
+    <div v-else>
+      <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="login__form">
+            <label for="input-file" class="login__form__label">
+              <img src="@/assets/egg.png" alt="" />
+            </label>
+            <div class="login__form__username">
+              <button type="submit" class="btn btn-info btn-fill" @click="goLoginSubmit">
+                Login
               </button>
-              <span>This is a notification with close button.</span>
-            </div>
-            <div class="alert alert-info alert-with-icon" data-notify="container">
-              <button type="button" aria-hidden="true" class="close" data-dismiss="alert">
-                <i class="nc-icon nc-simple-remove"></i>
-              </button>
-              <span data-notify="icon" class="nc-icon nc-app"></span>
-              <span data-notify="message">This is a notification with close button and icon.</span>
-            </div>
-            <div class="alert alert-info alert-with-icon" data-notify="container">
-              <button type="button" aria-hidden="true" class="close" data-dismiss="alert">
-                <i class="nc-icon nc-simple-remove"></i>
-              </button>
-              <span data-notify="icon" class="nc-icon nc-app"></span>
-              <span data-notify="message">This is a notification with close button and icon and have many lines. You can see that the icon and the close button are always vertically aligned. This is a beautiful notification. So you don't have to worry about the style.</span>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <h5>Notification states</h5>
-            <div class="alert alert-info">
-              <button type="button" aria-hidden="true" class="close" data-dismiss="alert">
-                <i class="nc-icon nc-simple-remove"></i>
-              </button>
-              <span><b> Info - </b> This is a regular notification made with ".alert-info"</span>
-            </div>
-            <div class="alert alert-success">
-              <button type="button" aria-hidden="true" class="close" data-dismiss="alert">
-                <i class="nc-icon nc-simple-remove"></i>
-              </button>
-              <span><b> Success - </b> This is a regular notification made with ".alert-success"</span>
-            </div>
-            <div class="alert alert-warning">
-              <button type="button" aria-hidden="true" class="close" data-dismiss="alert">
-                <i class="nc-icon nc-simple-remove"></i>
-              </button>
-              <span><b> Warning - </b> This is a regular notification made with ".alert-warning"</span>
-            </div>
-            <div class="alert alert-danger">
-              <button type="button" aria-hidden="true" class="close" data-dismiss="alert">
-                <i class="nc-icon nc-simple-remove"></i>
-              </button>
-              <span><b> Danger - </b> This is a regular notification made with ".alert-danger"</span>
             </div>
           </div>
         </div>
-        <br>
-        <br>
-        <div class="places-buttons">
-          <div class="row justify-content-center">
-            <div class="col-6 text-center">
-              <h5>Notifications Places
-                <p class="category">Click to view notifications</p>
-              </h5>
-            </div>
-          </div>
-          <div class="row justify-content-center">
-            <div class="col-md-3 col-md-offset-1">
-              <button class="btn btn-default btn-block" @click="notifyVue('top', 'left')">Top Left</button>
-            </div>
-            <div class="col-md-3">
-              <button class="btn btn-default btn-block" @click="notifyVue('top', 'center')">Top Center</button>
-            </div>
-            <div class="col-md-3">
-              <button class="btn btn-default btn-block" @click="notifyVue('top', 'right')">Top Right</button>
-            </div>
-          </div>
-          <div class="row justify-content-center">
-            <div class="col-md-3 col-md-offset-1">
-              <button class="btn btn-default btn-block" @click="notifyVue('bottom', 'left')">Bottom Left</button>
-            </div>
-            <div class="col-md-3">
-              <button class="btn btn-default btn-block" @click="notifyVue('bottom', 'center')">Bottom Center</button>
-            </div>
-            <div class="col-md-3">
-              <button class="btn btn-default btn-block" @click="notifyVue('bottom', 'right')">Bottom Right</button>
-            </div>
-
-          </div>
-        </div>
-      </card>
+      </div>
+    </div>
     </div>
   </div>
 </template>
+<script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 <script>
-  import Card from 'src/components/Cards/Card.vue'
-
+  import { mapMutations, mapState } from "vuex";
+  import ChatList from "src/components/Chat/ChatList";
+  import ChatForm from "src/components/Chat/ChatForm";
   export default {
     components: {
-      Card
+      ChatList,ChatForm
     },
     data () {
       return {
         type: ['', 'info', 'success', 'warning', 'danger'],
         notifications: {
           topCenter: false
-        }
+        },
+        userName: null,
+        sid : null,
+        receive_msg:null
       }
     },
+    created() {
+      this.userName = this.$store.state.loginModule.user;
+    },
+    watch: {
+      getReceiveMsg (val, oldVal) {
+          console.log('watched: ', val)
+          const msg2 = {
+            userName: "영양코칭AI",
+            content: this.$store.state.testModule.receiveMessage
+          }
+          this.msgData.push(msg2)   
+          const element = document.getElementById("chat__body");
+          element.scrollTop = element.scrollHeight;
+      },
+    },
+    beforeDestroy() {
+      console.log("beforedestroy");
+    },
+    mounted() {
+      console.log("mounted");
+      console.log("userName is" + this.userName);
+      console.log("Login is" + localStorage.getItem("Login"));
+
+    },
+    computed: {
+      ...mapState({
+        msgData: (state) => state.loginModule.msgData,
+        myName: (state) => state.loginModule.user,
+        getReceiveMsg: (state) => state.testModule.receiveMessage,
+      }),
+     
+    },
     methods: {
+      goLoginSubmit() {
+        this.$router.push({
+          name: "User"
+        });
+      },
       notifyVue (verticalAlign, horizontalAlign) {
         const color = Math.floor((Math.random() * 4) + 1)
         this.$notifications.notify(
@@ -121,11 +96,41 @@
             verticalAlign: verticalAlign,
             type: this.type[color]
           })
-      }
+      },
+      sendMessage(content) {
+        const username = this.userName;
+        console.log("Send message:" + content + "  ");
+        const msg = {
+          userName: username,
+          content: content
+        }
+        this.msgData.push(msg)
+        this.$store.dispatch('testModule/setMyName',msg.userName);
+        this.$store.dispatch('testModule/setMyMessage',msg.content);
+        this.$store.dispatch('testModule/getTestMessage');
+      },
     }
   }
 
 </script>
 <style lang="scss">
+.chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chat__header {
+  background: #ffffff;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 24px 24px 24px 0px;
+  padding: 1rem;
+  font-size: 14px;
+  font-weight: 70;
+}
+
+.chat__header__greetings {
+  color: #292929;
+}
 
 </style>
