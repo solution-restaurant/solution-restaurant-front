@@ -1,45 +1,57 @@
-# solution-restaurant
+# [Vue Light Bootstrap Dashboard](http://vuejs.creative-tim.com/vue-light-bootstrap-dashboard) [![version][version-badge]][changelog] [![license][license-badge]][license]
 
-## Project setup
-```
-npm install
-```
+> Admin dashboard based on light bootstrap dashboard UI template + vue-router
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+This project is a vue version of [Light bootstrap dashboard](https://www.creative-tim.com/product/light-bootstrap-dashboard)
+designed for vue js. The dashboard includes Bootstrap 4, vue-router, chartist, google-maps and several other plugins/components.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Check the [Live Demo here](http://vuejs.creative-tim.com/vue-light-bootstrap-dashboard).
 
-### Lints and fixes files
-```
-npm run lint
-```
+![](public/Dashboard.PNG)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## :rocket: Getting started
 
-### Commit message type
-```
-feat	새로운 기능 추가
-fix	버그 수정
-docs	문서 수정
-style	코드 formatting, 세미콜론(;) 누락, 코드 변경이 없는 경우
-refactor	코드 리팩터링
-test	테스트 코드, 리팩터링 테스트 코드 추가(프로덕션 코드 변경 X)
-chore	빌드 업무 수정, 패키지 매니저 수정(프로덕션 코드 변경 X)
-design	CSS 등 사용자 UI 디자인 변경
-build	관련 변경 사항 빌드
-ci	CI 관련 변경 사항
-perf	성능을 향상시키는 코드 변경
-omment	필요한 주석 추가 및 변경
-revert	되돌리기
-rename	파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우
-remove	파일을 삭제하는 작업만 수행한 경우
-!BREAKING CHANGE	커다란 API 변경의 경우
-!HOTFIX	급하게 치명적인 버그를 고쳐야 하는 경우
-```
+Vue Light Bootstrap Dashboard is built on top of Bootstrap 4, Vuejs and Vue-router. To get started do the following steps:
+
+1. Download the project
+2. Make sure you have node.js (https://nodejs.org/en/) installed
+3. Type `npm install` in the source folder where `package.json` is located
+4. Type `npm run dev` to start the development server
+
+The repo uses [vue-cli](https://github.com/vuejs/vue-cli) scaffolding which takes care of the development setup with webpack and all the necessary modern tools to make web development faster and easier.
+
+## [Documentation](https://demos.creative-tim.com/vue-light-bootstrap-dashboard/documentation/#/buttons)
+
+## :cloud: Build Setup
+
+### install dependencies
+
+`npm install`
+
+### serve with hot reload at localhost:8000
+
+`npm run dev`
+
+### build for production with minification
+
+`npm run build`
+
+### run unit tests
+
+`npm run unit`
+
+### run and watch unit tests
+
+`npm run unit:watch`
+
+## :clipboard: Contribution guide
+
+- `npm install` or `yarn install`
+- Please don't use jQuery or jQuery based plugins since there are many pure Vue alternatives
+
+For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+[changelog]: ./CHANGELOG.md
+[license]: ./LICENSE.md
+[version-badge]: https://img.shields.io/badge/version-2.1.0-blue.svg
+[license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
