@@ -57,13 +57,13 @@
     },
     computed:{
       tableData(){
-        return this.$store.state.mealModule.userMealData;
+        return this.$store.state.alarmModule.userMealData;
       }
     },
     created () {
-      alert("??? : " + this.$store.state.mealModule.userRecoMeal)
+      alert("??? : " + this.$store.state.alarmModule.userRecoMeal)
       if(this.$store.state.loginModule.user != null){
-        this.$store.dispatch("mealModule/getAlarmAll", this.$store.state.loginModule.user);//action 실행
+        this.$store.dispatch("alarmModule/getAlarmAll", this.$store.state.loginModule.user);//action 실행
       }
     },
     data () {
