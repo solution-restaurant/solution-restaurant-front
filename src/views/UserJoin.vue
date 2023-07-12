@@ -23,7 +23,7 @@
               </div>
               <button
                 @click="setJoin"
-                class="btn btn-primary">
+                class="btn btn-info btn-fill">
                 회원가입
               </button>
           </div>

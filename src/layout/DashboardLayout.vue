@@ -32,12 +32,12 @@
       </sidebar-link> -->
       <sidebar-link to="/admin/overview">
         <i class="nc-icon nc-chart-pie-35"></i>
-        <p>Analyze</p>
+        <p>Setting</p>
       </sidebar-link>
-      <sidebar-link to="/admin/testTableList">
+      <!-- <sidebar-link to="/admin/testTableList">
         <i class="nc-icon nc-bell-55"></i>
         <p>TestTableList</p>
-      </sidebar-link>
+      </sidebar-link> -->
 
       <template slot="bottom-links">
         <!-- <sidebar-link class="active"

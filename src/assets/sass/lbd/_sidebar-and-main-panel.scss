@@ -64,16 +64,16 @@ body > .navbar-collapse{
             .logo-img{
               width: 40px;
               display: inline-flex;
-              justify-content: center;
-              align-items: center;
-              height: 40px;
-              margin-left: 0px;
-              margin-right: 10px;
-              background: white;
-              border-radius: 40px;
+            //   justify-content: center;
+            //   align-items: center;
+            //   height: 40px;
+            //   margin-left: 0px;
+            //   margin-right: 10px;
+            //   background: white;
+            //   border-radius: 40px;
 
               img{
-                max-width: 21px;
+                max-width: 31px;
               }
             }
           }
@@ -240,12 +240,12 @@ body > .navbar-collapse{
     }
 
     &:before{
-        opacity: .33;
-        background: #000000;
+        // opacity: .33;
+        background: #b6abab;
     }
 
     &:after{
-       @include icon-gradient($new-purple, $purple-color-bottom);
+    //    @include icon-gradient($new-purple, $purple-color-bottom);
        z-index: 3;
        opacity: 1;
     }
@@ -255,9 +255,9 @@ body > .navbar-collapse{
         opacity: .77;
     }
 
-    &[data-color="black"]:after{
-      @include icon-gradient($black-color-top, $black-color-bottom);
-    }
+    // &[data-color="black"]:after{
+    //   @include icon-gradient($black-color-top, $black-color-bottom);
+    // }
     &[data-color="blue"]:after{
         @include icon-gradient($new-dark-blue, $blue-color-bottom);
     }

@@ -2,52 +2,35 @@
   <div class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-12">
-          <card class="strpied-tabled-with-hover"
-                body-classes="table-full-width table-responsive"
-          >
+        <div>
+          <card>
             <template slot="header">
-              <h4 class="card-title">Striped Table with Hover</h4>
-              <p class="card-category">Here is a subtitle for this table</p>
+              <h5 class="title">식단</h5>
+              <div style="font-size:13px">
+                추천받은 식단을 확인하세요!
+              </div>
+              <p class="category" style="font-size:13px; color:red">*setting 탭에 알람을 설정하고 피드백을 받아보세요!</p>
             </template>
-            <l-table class="table-hover table-striped"
-                     :columns="table1.columns"
-                     :data="table1.data">
+            <l-table  :data="tableData">
+              <template slot-scope="{row}">
+                <td>
+                  <tr>
+                    {{row.title}}
+                  </tr>
+                  <tr v-if="row.checked">
+                    {{row.feedback}}
+                  </tr>
+                </td>
+                <td>
+                  <base-checkbox v-model="row.checked"></base-checkbox>
+                  <button type="button" class="btn-simple btn btn-xs btn-danger" v-tooltip.top-center="deleteTooltip">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </td>
+              </template>
             </l-table>
           </card>
-
-        </div>
-
-        <div class="col-12">
-          <card class="card-plain">
-            <template slot="header">
-              <h4 class="card-title">Table on Plain Background</h4>
-              <p class="card-category">Here is a subtitle for this table</p>
-            </template>
-            <div class="table-responsive">
-              <l-table class="table-hover"
-                       :columns="table2.columns"
-                       :data="table2.data">
-              </l-table>
-            </div>
-          </card>
-        </div>
-
-        <div class="col-12">
-          <card class="strpied-tabled-with-hover"
-                body-classes="table-full-width table-responsive"
-          >
-            <template slot="header">
-              <h4 class="card-title">Small table</h4>
-              <p class="card-category">Here is a subtitle for this table</p>
-            </template>
-            <l-table class="table-hover table-striped table-sm"
-                     :columns="table1.columns"
-                     :data="table1.data">
-            </l-table>
-          </card>
-
-        </div>
+      </div>
 
       </div>
     </div>
@@ -56,57 +39,55 @@
 <script>
   import LTable from 'src/components/Table.vue'
   import Card from 'src/components/Cards/Card.vue'
-  const tableColumns = ['Id', 'Name', 'Salary', 'Country', 'City']
-  const tableData = [{
-    id: 1,
-    name: 'Dakota Rice',
-    salary: '$36.738',
-    country: 'Niger',
-    city: 'Oud-Turnhout'
-  },
-  {
-    id: 2,
-    name: 'Minerva Hooper',
-    salary: '$23,789',
-    country: 'Curaçao',
-    city: 'Sinaai-Waas'
-  },
-  {
-    id: 3,
-    name: 'Sage Rodriguez',
-    salary: '$56,142',
-    country: 'Netherlands',
-    city: 'Baileux'
-  },
-  {
-    id: 4,
-    name: 'Philip Chaney',
-    salary: '$38,735',
-    country: 'Korea, South',
-    city: 'Overland Park'
-  },
-  {
-    id: 5,
-    name: 'Doris Greene',
-    salary: '$63,542',
-    country: 'Malawi',
-    city: 'Feldkirchen in Kärnten'
-  }]
   export default {
     components: {
       LTable,
       Card
     },
+    watch:{
+      tableData(val){
+        console.log("watch startTime", val);
+        var jsonString = JSON.stringify(val);
+        // alert(jsonString);
+        
+        var jsonData = JSON.parse(jsonString);
+        for (var i = 0; i < jsonData.length; i++)
+          console.log(jsonData[i]);
+      }
+    },
+    computed:{
+      tableData(){
+        return this.$store.state.mealModule.userMealData;
+      }
+    },
+    created () {
+      alert("??? : " + this.$store.state.mealModule.userRecoMeal)
+      if(this.$store.state.loginModule.user != null){
+        this.$store.dispatch("mealModule/getAlarmAll", this.$store.state.loginModule.user);//action 실행
+      }
+    },
     data () {
       return {
-        table1: {
-          columns: [...tableColumns],
-          data: [...tableData]
-        },
-        table2: {
-          columns: [...tableColumns],
-          data: [...tableData]
-        }
+        deleteTooltip: 'Remove',
+      //   tableData : [{
+      //     id:0,
+      //     title: '소고기미ddddddddddddddd역국',
+      //     feedback: '↳댓Dakota Rice',
+      //     checked: false,
+      //   },
+      //   {
+      //     id:1,
+      //     title: '소고기미역국',
+      //     feedback: '↳댓Dakota Rice',
+      //     checked: false,
+      //   },
+      //   {
+      //     id:2,
+      //     title: '소고기미역국',
+      //     feedback: '↳댓Dakota Rice',
+      //     checked: false,
+      //   },
+      // ]
       }
     }
   }
