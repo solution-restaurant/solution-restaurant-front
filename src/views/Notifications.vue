@@ -14,7 +14,7 @@
         <div class="col-md-8">
           <div class="login__form">
             <label for="input-file" class="login__form__label">
-              <img src="@/assets/egg.png" alt="" />
+              <img src="@/assets/icon-modified2.png" alt="" />
             </label>
             <div class="login__form__username">
               <button type="submit" class="btn btn-info btn-fill" @click="goLoginSubmit">
@@ -79,6 +79,26 @@
         getReceiveMsg: (state) => state.testModule.receiveMessage,
       }),
      
+    },
+    mounted() {
+      document.addEventListener("vueIncrease",function(event) {
+        alert("this : " + event.detail.data );
+        console.log("this : "+ event.detail.data);
+        this.count=event.detail.data
+        if(this.count=='Y'){
+         //음식먹었는지 안먹었는지 업데이트
+
+        }else{
+          //아무것도안함 
+        }
+      }.bind(this)),
+      document.addEventListener("alarmOff",function(event) {
+        alert("this : " + event.detail.data );
+        console.log("this : "+ event.detail.data);
+        event.preventDefault();
+        this.$store.dispatch('loginModule/setUserAlarmState',"N"); //store 업뎃
+        this.$store.dispatch("loginModule/updateAlarmState", "N");
+      }.bind(this))
     },
     methods: {
       goLoginSubmit() {

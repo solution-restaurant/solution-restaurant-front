@@ -1,7 +1,9 @@
 <template>
   <div v-if="userName == null">
     <h3>로그인</h3>
+    <br>
     <div class="mb-3">
+      <label class="form-label">아이디</label>
       <input
         id="input-username"
         type="name"
@@ -9,8 +11,7 @@
         v-model="user.name" />
     </div>
     <div class="mb-3">
-      <label
-        class="form-label">비밀번호</label>
+      <label class="form-label">비밀번호</label>
       <input
         type="password"
         class="form-control"
@@ -18,12 +19,12 @@
     </div>
     <button
       @click="loginSubmit" style="margin-right: 10px;"
-      class="btn btn-primary">
+      class="btn btn-info btn-fill">
       로그인
     </button>
     <button
       @click="goJoin"
-      class="btn btn-primary">
+      class="btn btn-info btn-fill">
       회원가입
     </button>
   </div>

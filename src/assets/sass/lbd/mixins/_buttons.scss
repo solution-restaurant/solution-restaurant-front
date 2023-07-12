@@ -1,7 +1,7 @@
 // Mixin for generating new styles
 @mixin btn-styles($btn-color, $btn-states-color) {
-  border-color: $btn-color;
-  color: $btn-color;
+  border-color: #a9c5b9;
+  color: #a9c5b9;
   
   &:hover,
   &:focus,
@@ -9,8 +9,8 @@
   &.active,
   .open > &.dropdown-toggle {
     background-color: $transparent-bg;
-    color: $btn-states-color;
-    border-color: $btn-states-color;
+    color: #000000;
+    border-color: #000000;
   }
   
   &.disabled,
@@ -24,14 +24,14 @@
     &:active,
     &.active {
       background-color: $transparent-bg;
-          border-color: $btn-color;
+          border-color: #a9c5b9;
     }
   }
   
 
   &.btn-fill {
-    color: $white-color;
-    background-color: $btn-color;
+    color: #a9c5b9;
+    background-color: $transparent-bg;
     @include opacity(1);  
 
     &:hover,
@@ -39,8 +39,8 @@
     &:active,
     &.active,
     .open > &.dropdown-toggle{
-        background-color: $btn-states-color;
-        color: $white-color;
+        background-color: $transparent-bg;
+        color: #000000
     }
     
     .caret{
@@ -49,7 +49,7 @@
   }
   
   .caret{
-      border-top-color: $btn-color;
+      border-top-color: #ffffff;
   }
 }
 

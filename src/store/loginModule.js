@@ -10,6 +10,8 @@ const loginModule = {
     userPasswordOfJoin: 'test',
     userNameOfLogin: 'test',
     userPasswordOfLogin: 'test',
+    userAlarmTime: '10:00',
+    userAlarmState: false,
   }),
   getters: {
   },
@@ -41,6 +43,12 @@ const loginModule = {
     },
     SET_MY_PASSWORD_OF_LOGIN(state, payload) {
       state.userPasswordOfLogin = payload;
+    },
+    SET_ALARM_TIME(state, payload) {
+      state.userAlarmTime = payload;
+    },
+    SET_ALARM_STATE(state, payload) {
+      state.userAlarmState = payload;
     },
   },
   actions: {
@@ -86,6 +94,8 @@ const loginModule = {
       return axios.post("/api/v1/health/login", {
         userName: state.userNameOfLogin
         , password :state.userPasswordOfLogin
+        , alarmTime :state.userAlarmTime
+        , alarmState :state.userAlarmState
       }, {
           headers: {
               'Content-type': 'application/json',
@@ -96,6 +106,9 @@ const loginModule = {
         if(response.data["userName"] != 'null'){
           alert("로그인 완료");
           commit("LOGIN", state.userNameOfLogin);
+          //알람 시간 세팅
+          commit("SET_ALARM_TIME", response.data["alarmTime"] );
+          commit("SET_ALARM_STATE", response.data["alarmState"] );
           window.location.href = window.location.origin +"/#/admin/notifications";
           window.location.reload();
         }else{
@@ -108,6 +121,62 @@ const loginModule = {
       // commit('LOGIN', loginApi.axiosLoginApi()); // 서버 생성 후 테스트 230521 KJT
       commit("RESET_MSG_DATA");
       commit("LOGOUT", userName);
+    },
+    setUserAlarmTime({ state, commit }, alarmTime) {
+      console.log(alarmTime);
+      commit("SET_ALARM_TIME", alarmTime);
+    },
+    setUserAlarmState({ state, commit }, alarmState) {
+      console.log(alarmState);
+      commit("SET_ALARM_STATE", alarmState);
+    },
+    updateAlarmTime({ state, commit }) {
+      console.log("user.userName" + state.userNameOfLogin + "  " + state.userPasswordOfLogin);
+      return axios.post("/api/v1/health/updateAlarmTime", {
+        userName: state.userNameOfLogin
+        , password :state.userPasswordOfLogin
+        , alarmTime :state.userAlarmTime
+        , alarmState :state.userAlarmState
+      }, {
+          headers: {
+              'Content-type': 'application/json',
+          }
+      }).then((response) => {
+        console.log("content: " + response.data["userName"]);
+        console.log(state.receiveMessage);
+        if(response.data["userName"] != 'null'){
+          alert("updateAlarmTime 완료");
+          //알람 시간 세팅
+          commit("SET_ALARM_TIME", response.data["alarmTime"] );
+          commit("SET_ALARM_STATE", response.data["alarmState"] );
+        }else{
+          alert("updateAlarmTime 실패");
+        }
+      });
+    },
+    updateAlarmState({ state, commit }) {
+      console.log("user.userName" + state.userNameOfLogin + "  " + state.userPasswordOfLogin);
+      return axios.post("/api/v1/health/updateAlarmState", {
+        userName: state.userNameOfLogin
+        , password :state.userPasswordOfLogin
+        , alarmTime :state.userAlarmTime
+        , alarmState :state.userAlarmState
+      }, {
+          headers: {
+              'Content-type': 'application/json',
+          }
+      }).then((response) => {
+        console.log("content: " + response.data["userName"]);
+        console.log(state.receiveMessage);
+        if(response.data["userName"] != 'null'){
+          alert("updateAlarmState 완료");
+          //알람 시간 세팅
+          commit("SET_ALARM_TIME", response.data["alarmTime"] );
+          commit("SET_ALARM_STATE", response.data["alarmState"] );
+        }else{
+          alert("updateAlarmState 실패");
+        }
+      });
     },
   },
   modules: {
