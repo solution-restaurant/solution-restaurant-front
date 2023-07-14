@@ -1,14 +1,5 @@
 <template>
-  <gmap-map
-    id="map"
-    :center="center"
-    :zoom="13"
-    :options="options"
-    map-type-id="terrain"
-  >
-    <gmap-marker :position="center">
-    </gmap-marker>
-  </gmap-map>
+  <a href="/download/mobile-release.apk" type="application/vnd.android.package-archive" target="_blank">현마카세 다운로드 링크</a>
 </template>
 <script>
   import {API_KEY} from './Maps/API_KEY'
