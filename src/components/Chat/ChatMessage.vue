@@ -18,8 +18,7 @@
         {{ msg.from.userName }}
       </p>
       <div class="chat__yourmessage__p">
-        <p class="chat__yourmessage__paragraph">
-          {{ msg.content }}
+        <p class="chat__yourmessage__paragraph" v-html="msg.content">
         </p>
         <!-- <p class="chat__yourmessage__time">23:38</p> -->
       </div>

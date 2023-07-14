@@ -60,9 +60,9 @@
       }else{
         this.alarmState = true
       }
-      alert("??? : " + this.$store.state.mealModule.userRecoMeal)
+      alert("??? : " + this.$store.state.alarmModule.userRecoMeal)
       if(this.$store.state.loginModule.user != null){
-        this.$store.dispatch("mealModule/getAlarmRecent", this.$store.state.loginModule.user);//action 실행
+        this.$store.dispatch("alarmModule/getAlarmRecent", this.$store.state.loginModule.user);//action 실행
       }
     },
     methods: {
@@ -93,8 +93,8 @@
         //앱 세팅 
         if(this.alarmState){
           //알람 켠상태
-          alert("is userRecoMeal: " + this.$store.state.mealModule.userRecoMeal);
-          window.MyApp.sendMessage(this.alarmTime + ":" + this.alarmState + ":" + this.$store.state.mealModule.userRecoMeal);
+          alert("is userRecoMeal: " + this.$store.state.alarmModule.userRecoMeal);
+          window.MyApp.sendMessage(this.alarmTime + ":" + this.alarmState + ":" + this.$store.state.alarmModule.userRecoMeal);
         }else{
           //알람 끈상태 
           window.MyApp.sendMessage(this.alarmTime + ":" + this.alarmState + ":" +"추천없음");

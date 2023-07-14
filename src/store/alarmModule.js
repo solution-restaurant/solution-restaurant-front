@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const mealModule = {
+const alarmModule = {
   namespaced: true,
   state: () => ({
     userRecoMeal: 'test',
@@ -121,4 +121,4 @@ const mealModule = {
   modules: {
   }
 };
-export default mealModule;
+export default alarmModule;

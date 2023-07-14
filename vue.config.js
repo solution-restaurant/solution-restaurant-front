@@ -36,7 +36,7 @@ module.exports = {
     proxy: {
       '/api': {
         // target: 'http://ec2-52-78-197-10.ap-northeast-2.compute.amazonaws.com:3000/',
-        target: 'http://localhost:8000/',
+        target: 'http://127.0.0.1:8000/',
       }
     }
   }
