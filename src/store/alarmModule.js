@@ -59,7 +59,7 @@ const alarmModule = {
       commit("SET_USER_ALARM_IMG", tmp);
     },
     getAlarmRecent({ state, commit },tmp) {
-      alert("user.userName" + tmp + "  " + state.userRecoMeal +"  "+ state.userResOfAi+"  " + state.userChkEat+ "  " + state.userMLD + " "+ state.userAlarmImg);
+      // alert("user.userName" + tmp + "  " + state.userRecoMeal +"  "+ state.userResOfAi+"  " + state.userChkEat+ "  " + state.userMLD + " "+ state.userAlarmImg);
       return axios.post("/api/v1/health/getAlarmRecent", {
         userName: tmp,
         userRecoMeal: state.userRecoMeal,
