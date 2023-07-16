@@ -9,6 +9,7 @@
             </div>
             <div slot="content">
               <p class="card-category" style ="margin-bottom:5px;">알람</p>
+              <p>다음식단 : {{recentMeal}}</p>
               <p>
                 <input type="time" v-model="alarmTime" @change="changeAlarmTime">&nbsp;
                 <toggle-button  v-model="alarmState" @change="alarmSubmit" ></toggle-button>  
@@ -33,6 +34,7 @@
   </div>
 </template>
 <script>
+  import { mapMutations, mapState } from "vuex";
   import ChartCard from 'src/components/Cards/ChartCard.vue'
   import StatsCard from 'src/components/Cards/StatsCard.vue'
   import LTable from 'src/components/Table.vue'
@@ -45,8 +47,26 @@
       ChartCard,
       StatsCard
     },
+    watch: {
+      getRecoMeal (val, oldVal) {
+          alert('watched: ', val)
+          if(this.$store.state.alarmModule.userRecoMeal != null){
+            this.recentMeal = this.$store.state.alarmModule.userRecoMeal;
+          }else{
+            alert("최신식단 없음 알람끔!")
+            this.recentMeal = "없음"
+            this.alarmState = false
+          }
+      },
+    },
+    computed:{
+      ...mapState({
+        getRecoMeal: (state) => state.alarmModule.userRecoMeal,
+      }),
+    },
     data () {
       return {
+        recentMeal:'',
         accuracySate: '',
         alarmState: false,
         alarmTime: this.$store.state.loginModule.userAlarmTime,

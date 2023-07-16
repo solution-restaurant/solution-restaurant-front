@@ -14,6 +14,7 @@ const alarmModule = {
   },
   mutations: {
     SET_USER_RECO_MEAL(state, payload) {
+      alert('SET_USER_RECO_MEAL: ', payload)
       state.userRecoMeal = payload;
     },
     SET_USER_RES_OF_AI(state, payload) {
@@ -59,7 +60,7 @@ const alarmModule = {
       commit("SET_USER_ALARM_IMG", tmp);
     },
     getAlarmRecent({ state, commit },tmp) {
-      alert("user.userName" + tmp + "  " + state.userRecoMeal +"  "+ state.userResOfAi+"  " + state.userChkEat+ "  " + state.userMLD + " "+ state.userAlarmImg);
+      // alert("user.userName" + tmp + "  " + state.userRecoMeal +"  "+ state.userResOfAi+"  " + state.userChkEat+ "  " + state.userMLD + " "+ state.userAlarmImg);
       return axios.post("/api/v1/health/getAlarmRecent", {
         userName: tmp,
         userRecoMeal: state.userRecoMeal,
@@ -72,10 +73,9 @@ const alarmModule = {
               'Content-type': 'application/json',
           }
       }).then((response) => {
-        alert("content: " + response.data["userRecoMeal"]);
+        // alert("content: " + response.data["userRecoMeal"]);
         console.log(state.receiveMessage);
         if(response.data["userRecoMeal"] != 'null'){
-          alert("최신 식단 가져오기 완료");
           //알람 시간 세팅
           commit("SET_USER_RECO_MEAL", response.data["userRecoMeal"] );
           commit("SET_USER_RES_OF_AI", response.data["userResOfAi"] );
@@ -84,6 +84,7 @@ const alarmModule = {
           commit("SET_USER_ALARM_IMG", response.data["userAlarmImg"] );
         }else{
           alert("최신 식단 없음");
+          commit("SET_USER_RECO_MEAL", null );
         }
       });
     },
@@ -101,7 +102,7 @@ const alarmModule = {
               'Content-type': 'application/json',
           }
       }).then((response) => {
-        alert("content: " + response.data["userRecoMeal"]);
+        // alert("content: " + response.data["userRecoMeal"]);
         console.log(state.receiveMessage);
         if(response.data["userRecoMeal"] != 'null'){
           alert("전체 식단 가져오기 완료");
