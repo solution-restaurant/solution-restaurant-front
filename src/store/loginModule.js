@@ -161,6 +161,8 @@ const loginModule = {
       return axios.post("/api/v1/health/updateAlarmTime", {
         userName: state.userNameOfLogin
         , password :state.userPasswordOfLogin
+        , allergy :state.userAllergyOfLogin
+        , disease :state.userDiseaseOfLogin
         , alarmTime :state.userAlarmTime
         , alarmState :state.userAlarmState
       }, {
@@ -181,10 +183,12 @@ const loginModule = {
       });
     },
     updateAlarmState({ state, commit }) {
-      console.log("user.userName" + state.userNameOfLogin + "  " + state.userPasswordOfLogin);
+      console.log("state.userAllergy" + state.userAllergy + "  " + state.userDisease + "  " + state.userAlarmTime + "  " + state.userAlarmState);
       return axios.post("/api/v1/health/updateAlarmState", {
         userName: state.userNameOfLogin
         , password :state.userPasswordOfLogin
+        , allergy :state.userAllergyOfLogin
+        , disease :state.userDiseaseOfLogin
         , alarmTime :state.userAlarmTime
         , alarmState :state.userAlarmState
       }, {

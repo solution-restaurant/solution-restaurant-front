@@ -78,7 +78,7 @@
               <a href="#" id="apply" class="upgrade-table-btn btn btn-b btn-round btn-fill btn-default" disabled @click="updateSubmit">적용</a>
             </td>
             <td>
-              <a target="_blank" href="http://www.creative-tim.com/product/vue-light-bootstrap-dashboard-pro/?ref=vue-lbdupgrade" class="upgrade-table-btn btn btn-round btn-fill btn-info">취소</a>
+              <a target="_blank"  @click="cancelSubmit" class="upgrade-table-btn btn btn-round btn-fill btn-info">취소</a>
             </td>
           </tr>
           </tbody>
@@ -170,6 +170,10 @@
         this.$store.dispatch('loginModule/setMyAllergy',this.allergySelect);
         this.$store.dispatch('loginModule/setMyDisease',this.diseaseSelect);
         this.$store.dispatch("loginModule/updateUserInfo");//action 실행
+      },
+      cancelSubmit(){
+        this.allergySelect = this.beforeAllergy
+        this.diseaseSelect = this.beforeDisease
       },
       loginSubmit() {
         localStorage.setItem("Login", "T");
