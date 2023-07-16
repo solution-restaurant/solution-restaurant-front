@@ -10,6 +10,8 @@ const loginModule = {
     userPasswordOfJoin: 'test',
     userNameOfLogin: 'test',
     userPasswordOfLogin: 'test',
+    userAllergyOfLogin: 'NONE',
+    userDiseaseOfLogin: 'NONE',
     userAlarmTime: '10:00',
     userAlarmState: false,
   }),
@@ -43,6 +45,12 @@ const loginModule = {
     },
     SET_MY_PASSWORD_OF_LOGIN(state, payload) {
       state.userPasswordOfLogin = payload;
+    },
+    SET_MY_ALLERGY(state, payload) {
+      state.userAllergyOfLogin = payload;
+    },
+    SET_MY_DISEASE(state, payload) {
+      state.userDiseaseOfLogin = payload;
     },
     SET_ALARM_TIME(state, payload) {
       state.userAlarmTime = payload;
@@ -89,11 +97,23 @@ const loginModule = {
       // commit('LOGIN', loginApi.axiosLoginApi()); // 서버 생성 후 테스트 230521 KJT
       commit("SET_MY_PASSWORD_OF_LOGIN", myMessage);
     },
+    setMyAllergy({ state, commit }, myAllergy) {
+      console.log(myAllergy);
+      // commit('LOGIN', loginApi.axiosLoginApi()); // 서버 생성 후 테스트 230521 KJT
+      commit("SET_MY_ALLERGY", myAllergy);
+    },
+    setMyDisease({ state, commit }, myDisease) {
+      console.log(myDisease);
+      // commit('LOGIN', loginApi.axiosLoginApi()); // 서버 생성 후 테스트 230521 KJT
+      commit("SET_MY_DISEASE", myDisease);
+    },
     login({ state, commit }) {
       console.log("user.userName" + state.userNameOfLogin + "  " + state.userPasswordOfLogin);
       return axios.post("/api/v1/health/login", {
         userName: state.userNameOfLogin
         , password :state.userPasswordOfLogin
+        , allergy :state.userAllergyOfLogin
+        , disease :state.userDiseaseOfLogin
         , alarmTime :state.userAlarmTime
         , alarmState :state.userAlarmState
       }, {
@@ -102,10 +122,16 @@ const loginModule = {
           }
       }).then((response) => {
         console.log("content: " + response.data["userName"]);
+        console.log("content: " + response.data["password"]);
         console.log(state.receiveMessage);
         if(response.data["userName"] != 'null'){
           alert("로그인 완료");
           commit("LOGIN", state.userNameOfLogin);
+          //로그인 정보 저장
+          commit("SET_MY_NAME_OF_LOGIN", response.data["userName"] );
+          commit("SET_MY_PASSWORD_OF_LOGIN", response.data["password"] );
+          commit("SET_MY_ALLERGY", response.data["allergy"] );
+          commit("SET_MY_DISEASE", response.data["disease"] );
           //알람 시간 세팅
           commit("SET_ALARM_TIME", response.data["alarmTime"] );
           commit("SET_ALARM_STATE", response.data["alarmState"] );
@@ -170,6 +196,35 @@ const loginModule = {
         console.log(state.receiveMessage);
         if(response.data["userName"] != 'null'){
           alert("updateAlarmState 완료");
+          //알람 시간 세팅
+          commit("SET_ALARM_TIME", response.data["alarmTime"] );
+          commit("SET_ALARM_STATE", response.data["alarmState"] );
+        }else{
+          alert("updateAlarmState 실패");
+        }
+      });
+    },
+    updateUserInfo({ state, commit }) {
+      console.log("user.userName" + state.userNameOfLogin + "  " + state.userPasswordOfLogin);
+      return axios.post("/api/v1/health/updateUserInfo", {
+        userName: state.userNameOfLogin
+        , password :state.userPasswordOfLogin
+        , allergy :state.userAllergyOfLogin
+        , disease :state.userDiseaseOfLogin
+        , alarmTime :state.userAlarmTime
+        , alarmState :state.userAlarmState
+      }, {
+          headers: {
+              'Content-type': 'application/json',
+          }
+      }).then((response) => {
+        console.log("content: " + response.data["userName"]);
+        console.log(state.receiveMessage);
+        if(response.data["userName"] != 'null'){
+          alert("updateAlarmState 완료");
+          //정보 수정
+          commit("SET_MY_ALLERGY", response.data["allergy"] );
+          commit("SET_MY_DISEASE", response.data["disease"] );
           //알람 시간 세팅
           commit("SET_ALARM_TIME", response.data["alarmTime"] );
           commit("SET_ALARM_STATE", response.data["alarmState"] );

@@ -42,39 +42,40 @@
           <tbody>
           <tr>
             <td class="text-center">닉네임</td>
-            <td>16</td>
+            <td>{{this.userName}}</td>
           </tr>
           <tr>
             <td class="text-center">비밀번호</td>
-            <td>4</td>
-          </tr>
-          <tr>
-            <td class="text-center">나이</td>
-            <td>4</td>
-          </tr>
-          <tr>
-            <td class="text-center">성별</td>
-            <td><i class="fa fa-check text-success"></i></td>
-          </tr>
-          <tr>
-            <td class="text-center">키</td>
-            <td><i class="fa fa-check text-success"></i></td>
-          </tr>
-          <tr>
-            <td class="text-center">몸무게</td>
-            <td><i class="fa fa-times text-danger"></i></td>
-          </tr>
-          <tr>
-            <td class="text-center">질환</td>
-            <td><i class="fa fa-times text-danger"></i></td>
+            <td>{{this.userPassword}}</td>
           </tr>
           <tr>
             <td class="text-center">알러지</td>
-            <td>Free</td>
+            <td><select v-model="allergySelect" @change="setAllergySelect($event)">
+                  <option
+                    v-for="(item, index) in allergyList"
+                    :key="index"
+                    :value="item.value"
+                    >{{ item.name }}</option
+                  >
+                </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center">질환</td>
+            <td>
+              <select v-model="diseaseSelect" @change="setDiseaseSelect($event)">
+                <option
+                  v-for="(item, index) in diseaseList"
+                  :key="index"
+                  :value="item.value"
+                  >{{ item.name }}</option
+                >
+              </select>
+            </td>
           </tr>
           <tr class="last-row">
             <td>
-              <a href="#" class="upgrade-table-btn btn btn-b btn-round btn-fill btn-default disabled">적용</a>
+              <a href="#" id="apply" class="upgrade-table-btn btn btn-b btn-round btn-fill btn-default" disabled @click="updateSubmit">적용</a>
             </td>
             <td>
               <a target="_blank" href="http://www.creative-tim.com/product/vue-light-bootstrap-dashboard-pro/?ref=vue-lbdupgrade" class="upgrade-table-btn btn btn-round btn-fill btn-info">취소</a>
@@ -92,18 +93,84 @@
     },
     data () {
       return {
-        userName: "",
-        inputName: "",
+        userName: "",//state로 부터 가져온거
+        userPassword: "",//state로 부터 가져온거 
         user: {
           password: '',
           name:''
-        }
+        },
+        beforeAllergy: "NONE",
+        allergySelect: "NONE",
+        allergyList: [
+          { name: "없음", value: "NONE" },
+          { name: "우유", value: "milk_allergy" },
+          { name: "계란", value: "egg_allergy" },
+          { name: "땅콩", value: "peanut_allergy" },
+          { name: "조개", value: "shellfish_allergy" },
+          { name: "밀가루", value: "gluten_allergy" },
+          { name: "새우", value: "shrimp_allergy" },
+          { name: "복숭아", value: "peach_allergy" },
+          { name: "토마토", value: "tomato_allergy" },
+        ],
+        beforeDisease: "NONE",
+        diseaseSelect: "NONE",
+        diseaseList: [
+          { name: "없음", value: "NONE" },
+          { name: "고혈압", value: "good_for_hypertension" },
+          { name: "당뇨병", value: "good_for_diabetes" },
+          { name: "심장질환", value: "good_for_heart_disease" },
+          { name: "뇌졸중", value: "good_for_stroke" },
+          { name: "암", value: "good_for_cancer" },
+          { name: "간질환", value: "good_for_liver_disease" },
+          { name: "폐질환", value: "good_for_lung_disease" },
+          { name: "비말", value: "good_for_obesity_disease" },
+        ],
       }
     },
     created() {
+      this.allergySelect = this.$store.state.loginModule.userAllergyOfLogin
+      this.diseaseSelect = this.$store.state.loginModule.userDiseaseOfLogin
+      this.beforeAllergy = this.$store.state.loginModule.userAllergyOfLogin
+      this.beforeDisease = this.$store.state.loginModule.userDiseaseOfLogin
       this.userName = this.$store.state.loginModule.user;
+      this.userPassword = this.$store.state.loginModule.userPasswordOfLogin;
     },
     methods: {
+      setAllergySelect(event){
+        // alert("is allergySelect : " + "is event allergySelect : " + event.target.value);
+        this.allergySelect = event.target.value;
+
+        if(this.beforeAllergy != this.allergySelect){
+          const target = document.getElementById('apply');
+          target.removeAttribute("disabled", false);
+        }else{
+          // alert("is beforeDisease : "+ this.beforeDisease + "is beforeDisease : " + event.target.value);
+          if(this.beforeDisease == this.diseaseSelect){
+            const target = document.getElementById('apply');
+            target.setAttribute("disabled",true);
+          }
+        }
+      },
+      setDiseaseSelect(event){
+        // alert("is diseaseSelect : " + "is event diseaseSelect : " + event.target.value);
+        this.diseaseSelect = event.target.value;
+        
+        if(this.beforeDisease != this.diseaseSelect){
+          const target = document.getElementById('apply');
+          target.removeAttribute("disabled", false);
+        }else{
+          if(this.beforeAllergy == this.allergySelect){
+            const target = document.getElementById('apply');
+            target.setAttribute("disabled",true);
+          }
+        }
+      },
+      updateSubmit(){
+        alert("join:" + this.allergySelect   + "  " + this.diseaseSelect);
+        this.$store.dispatch('loginModule/setMyAllergy',this.allergySelect);
+        this.$store.dispatch('loginModule/setMyDisease',this.diseaseSelect);
+        this.$store.dispatch("loginModule/updateUserInfo");//action 실행
+      },
       loginSubmit() {
         localStorage.setItem("Login", "T");
         const userInfo = {
@@ -113,7 +180,7 @@
         console.log("join:" + this.user.name + "  " + this.user.password);
         this.$store.dispatch('loginModule/setMyNameOfLogin',userInfo.userName);
         this.$store.dispatch('loginModule/setMyPasswordOfLogin',userInfo.password);
-        this.$store.dispatch("loginModule/login", userInfo);//action 실행
+        this.$store.dispatch("loginModule/login");//action 실행
         console.log(this.$store.state.loginModule.user);
       },
       goJoin() {
