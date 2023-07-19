@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div id="test" class="content" style="overflow-y: auto;">
     <div v-if="userName != null">
       <div class="chat__header ">
           안녕하세요. {{ userName }}님! 영양코칭AI '현마카세'입니다!
@@ -10,21 +10,24 @@
     </div>
     <div v-else>
       <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-8">
-          <div class="login__form">
-            <label for="input-file" class="login__form__label">
-              <img src="@/assets/icon-modified2.png" alt="" />
-            </label>
-            <div class="login__form__username">
-              <button type="submit" class="btn btn-info btn-fill" @click="goLoginSubmit">
-                Login
-              </button>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="login__form">
+              <label for="input-file" class="login__form__label">
+                <img src="@/assets/icon-modified2.png" alt="" />
+              </label>
+              <div class="login__form__username">
+                <button type="submit" class="btn btn-info btn-fill" @click="goLoginSubmit">
+                  Login
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div v-if="isLoading" class="lds-facebook" >
+    <img src="img/icon-modified.png" alt="" style="width:35%; height: 35%;">
     </div>
   </div>
 </template>
@@ -39,6 +42,7 @@
     },
     data () {
       return {
+        isLoading : false,
         type: ['', 'info', 'success', 'warning', 'danger'],
         notifications: {
           topCenter: false
@@ -53,6 +57,7 @@
     },
     watch: {
       getReceiveMsg (val, oldVal) {
+          this.setLoading(false)
           console.log('watched: ', val)
           const msg2 = {
             userName: "영양코칭AI",
@@ -81,26 +86,40 @@
      
     },
     mounted() {
-      document.addEventListener("vueIncrease",function(event) {
-        alert("this : " + event.detail.data );
+      document.addEventListener("vueIncreaseY",function(event) {
+        alert("vueIncreaseY : " + event.detail.data);
+        this.count=event.detail.data
+         //음식먹었는지 안먹었는지 업데이트
+        this.$store.dispatch('alarmModule/setUserMealId',this.count); //store 업뎃
+        this.$store.dispatch('alarmModule/setUserChkEat',"Y"); //store 업뎃
+        this.$store.dispatch("alarmModule/updateAlarmChkEatY",  this.$store.state.loginModule.user);
+      }.bind(this)),
+      document.addEventListener("vueIncreaseN",function(event) {
+        alert("this : " + event.detail.data);
         console.log("this : "+ event.detail.data);
         this.count=event.detail.data
-        if(this.count=='Y'){
          //음식먹었는지 안먹었는지 업데이트
-
-        }else{
-          //아무것도안함 
-        }
+        this.$store.dispatch('alarmModule/setUserMealId',this.count); //store 업뎃
+        this.$store.dispatch('alarmModule/setUserChkEat',"N"); //store 업뎃
+        this.$store.dispatch("alarmModule/updateAlarmChkEatN",  this.$store.state.loginModule.user);
       }.bind(this)),
       document.addEventListener("alarmOff",function(event) {
         alert("this : " + event.detail.data );
         console.log("this : "+ event.detail.data);
         event.preventDefault();
-        this.$store.dispatch('loginModule/setUserAlarmState',"N"); //store 업뎃
-        this.$store.dispatch("loginModule/updateAlarmState", "N");
+        // this.$store.dispatch('loginModule/setUserAlarmState',"N"); //store 업뎃
+        // this.$store.dispatch("loginModule/updateAlarmState", "N");
       }.bind(this))
     },
     methods: {
+      setLoading(isLoading){
+        if(isLoading){
+          this.isLoading = true;
+          
+        }else{
+          this.isLoading = false;
+        }
+      },
       goLoginSubmit() {
         this.$router.push({
           name: "User"
@@ -127,7 +146,9 @@
         this.msgData.push(msg)
         this.$store.dispatch('testModule/setMyName',msg.userName);
         this.$store.dispatch('testModule/setMyMessage',msg.content);
+        this.setLoading(true)
         this.$store.dispatch('testModule/getTestMessage');
+
       },
     }
   }
@@ -151,6 +172,26 @@
 
 .chat__header__greetings {
   color: #292929;
+}
+
+.lds-facebook{ 
+  top: 40%;
+  left: 50%;
+  position: fixed;
+  opacity: 1;
+  -webkit-animation: opacity 2s linear infinite;
+  animation: opacity 2s linear infinite;
+  @keyframes opacity {
+    0% {
+      opacity:90% ;
+    }
+    100% {
+      opacity:10% ;
+    }
+  }
+}
+.t{
+  background : rgba(0,0,0,0.1) ;
 }
 
 </style>

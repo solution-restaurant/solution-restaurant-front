@@ -5,7 +5,7 @@ const loginModule = {
   namespaced: true,
   state: () => ({
     msgData: [],
-    user: 'test',
+    user: null,
     userNameOfJoin: 'test',
     userPasswordOfJoin: 'test',
     userNameOfLogin: 'test',
