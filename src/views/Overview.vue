@@ -18,7 +18,7 @@
             </div>
           </stats-card>
         </div>
-        <div class="col-xl-4 col-md-6">
+        <!-- <div class="col-xl-4 col-md-6">
           <stats-card>
             <div slot="header" class="icon-success">
               <i class="nc-icon nc-light-3 text-success"></i>
@@ -28,7 +28,7 @@
               <toggle-button v-model="accuracySate"></toggle-button>  
             </div>
           </stats-card>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -95,10 +95,10 @@
         //앱 세팅 
         if(this.alarmState){
           //알람 켠 상태
-          window.MyApp.sendMessage(this.alarmTime + ":" + this.alarmState + ":" +"추천없음");
+          window.MyApp.sendMessage(this.alarmTime + ":" + this.alarmState + ":" +"추천없음" +":"+"없음"+":"+"없음"+":"+"없음"+":"+"없음"+":"+"없음");
         }else{
           //알람 끈상태
-          window.MyApp.sendMessage(this.alarmTime + ":" + this.alarmState + ":" +"추천없음");
+          window.MyApp.sendMessage(this.alarmTime + ":" + this.alarmState + ":" +"추천없음" +":"+"없음"+":"+"없음"+":"+"없음"+":"+"없음"+":"+"없음");
         }
       },
       alarmSubmit: function() {  
@@ -114,10 +114,15 @@
         if(this.alarmState){
           //알람 켠상태
           alert("is userRecoMeal: " + this.$store.state.alarmModule.userRecoMeal);
-          window.MyApp.sendMessage(this.alarmTime + ":" + this.alarmState + ":" + this.$store.state.alarmModule.userRecoMeal);
+          window.MyApp.sendMessage(this.alarmTime + ":" + this.alarmState + ":" + this.$store.state.alarmModule.userRecoMeal 
+          +":"+"없음"
+          +":"+this.$store.state.alarmModule.userAlarmImg 
+          +":"+this.$store.state.alarmModule.userGoodFB
+          +":"+this.$store.state.alarmModule.userBadFB
+          +":"+this.$store.state.alarmModule.userMealId);
         }else{
           //알람 끈상태 
-          window.MyApp.sendMessage(this.alarmTime + ":" + this.alarmState + ":" +"추천없음");
+          window.MyApp.sendMessage(this.alarmTime + ":" + this.alarmState + ":" +"추천없음" +":"+"없음"+":"+"없음"+":"+"없음"+":"+"없음"+":"+"없음");
         }
       },
       increase: function() {

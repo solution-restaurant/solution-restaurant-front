@@ -54,7 +54,7 @@
 
       </dashboard-content>
 
-      <content-footer></content-footer>
+      <!-- <content-footer></content-footer> --><!--메세지입력창자리로 대체-->
     </div>
   </div>
 </template>

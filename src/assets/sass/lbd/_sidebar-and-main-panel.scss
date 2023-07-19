@@ -287,8 +287,10 @@ body > .navbar-collapse{
     min-height: 100%;
 
     > .content{
+        max-height: 77%;
+        min-height: 77%;
         padding: 30px 15px;
-        min-height: calc(100% - 123px);
+        // min-height: calc(100% - 123px);
     }
 
     > .footer{
