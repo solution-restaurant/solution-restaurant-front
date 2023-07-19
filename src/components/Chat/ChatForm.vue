@@ -1,5 +1,5 @@
 <template>
-    <div class="form" id="inputMessage">
+    <div class="form" id="inputMessage" style="position: fixed;width: 85%;top: 85%;">
       <input
         class="form__input"
         type="text"
@@ -74,7 +74,7 @@
     border: none;
     padding: 0.5rem;
     font-size: 16px;
-    width: calc(100% - 60px);
+    width: calc(85% - 30px);
   }
   
   .form__input:focus {
