@@ -176,7 +176,7 @@
 
 .lds-facebook{ 
   top: 40%;
-  left: 50%;
+  left: 40%;
   position: fixed;
   opacity: 1;
   -webkit-animation: opacity 2s linear infinite;
