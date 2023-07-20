@@ -123,7 +123,7 @@
           { name: "암", value: "good_for_cancer" },
           { name: "간질환", value: "good_for_liver_disease" },
           { name: "폐질환", value: "good_for_lung_disease" },
-          { name: "비말", value: "good_for_obesity_disease" },
+          { name: "비만", value: "good_for_obesity_disease" },
         ],
       }
     },
