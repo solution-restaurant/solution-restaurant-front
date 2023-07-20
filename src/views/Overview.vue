@@ -95,10 +95,10 @@
         //앱 세팅 
         if(this.alarmState){
           //알람 켠 상태
-          window.MyApp.sendMessage(this.alarmTime + ":" + this.alarmState + ":" +"추천없음" +":"+"없음"+":"+"없음"+":"+"없음"+":"+"없음"+":"+"없음");
+          window.MyApp.sendMessage(this.alarmTime.split(':')[0] + "#" + this.alarmTime.split(':')[1] + "#" + this.alarmState + "#" +"추천없음" +"#"+"없음"+"#"+"없음"+"#"+"없음"+"#"+"없음"+"#"+"없음");
         }else{
           //알람 끈상태
-          window.MyApp.sendMessage(this.alarmTime + ":" + this.alarmState + ":" +"추천없음" +":"+"없음"+":"+"없음"+":"+"없음"+":"+"없음"+":"+"없음");
+          window.MyApp.sendMessage(this.alarmTime.split(':')[0] + "#" + this.alarmTime.split(':')[1] + "#" + this.alarmState + "#" +"추천없음" +"#"+"없음"+"#"+"없음"+"#"+"없음"+"#"+"없음"+"#"+"없음");
         }
       },
       alarmSubmit: function() {  
@@ -113,16 +113,24 @@
         //앱 세팅 
         if(this.alarmState){
           //알람 켠상태
-          alert("is userRecoMeal: " + this.$store.state.alarmModule.userRecoMeal);
-          window.MyApp.sendMessage(this.alarmTime + ":" + this.alarmState + ":" + this.$store.state.alarmModule.userRecoMeal 
+          alert("is userRecoMeal: " + this.$store.state.alarmModule.userRecoMeal
+          +"is alarmTime : " + this.alarmTime
+          +"is alarmState : " + this.alarmState
+          +"is alarmTime : " + this.$store.state.alarmModule.userRecoMeal
           +":"+"없음"
           +":"+this.$store.state.alarmModule.userAlarmImg 
           +":"+this.$store.state.alarmModule.userGoodFB
           +":"+this.$store.state.alarmModule.userBadFB
-          +":"+this.$store.state.alarmModule.userMealId);
+          );
+          window.MyApp.sendMessage(this.alarmTime.split(':')[0] + "#" + this.alarmTime.split(':')[1] + "#" + this.alarmState + "#" + this.$store.state.alarmModule.userRecoMeal 
+          +"#"+"없음"
+          +"#"+this.$store.state.alarmModule.userAlarmImg 
+          +"#"+this.$store.state.alarmModule.userGoodFB
+          +"#"+this.$store.state.alarmModule.userBadFB
+          +"#"+this.$store.state.alarmModule.userMealId);
         }else{
           //알람 끈상태 
-          window.MyApp.sendMessage(this.alarmTime + ":" + this.alarmState + ":" +"추천없음" +":"+"없음"+":"+"없음"+":"+"없음"+":"+"없음"+":"+"없음");
+          window.MyApp.sendMessage(this.alarmTime.split(':')[0] + "#" + this.alarmTime.split(':')[1] + "#" + this.alarmState + "#" +"추천없음" +"#"+"없음"+"#"+"없음"+"#"+"없음"+"#"+"없음"+"#"+"없음");
         }
       },
       increase: function() {

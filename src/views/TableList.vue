@@ -36,13 +36,13 @@
                   </tr>
                 </td>
                 <td>
-                  <tr v-if="row.MLD=='M'">
+                  <tr v-if="row.MLD=='아침'">
                     <div style="color:rgb(119, 203, 144)">아침</div>
                   </tr>
-                  <tr v-if="row.MLD=='L'">
+                  <tr v-if="row.MLD=='점심'">
                     <div style="color:#8eb6ff">점심</div>
                   </tr>
-                  <tr v-if="row.MLD=='D'">
+                  <tr v-if="row.MLD=='저녁'">
                     <div style="color:#974949">저녁</div>
                   </tr>
                   <tr>
