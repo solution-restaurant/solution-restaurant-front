@@ -49,7 +49,7 @@
     },
     watch: {
       getRecoMeal (val, oldVal) {
-          alert('watched: ', val)
+          // alert('watched: ', val)
           if(this.$store.state.alarmModule.userRecoMeal != null){
             this.recentMeal = this.$store.state.alarmModule.userRecoMeal;
           }else{
@@ -80,7 +80,7 @@
       }else{
         this.alarmState = true
       }
-      alert("this.$store.state.loginModule.user ??? : " + this.$store.state.loginModule.user + " ??? : " + this.$store.state.alarmModule.userRecoMeal)
+      // alert("this.$store.state.loginModule.user ??? : " + this.$store.state.loginModule.user + " ??? : " + this.$store.state.alarmModule.userRecoMeal)
       if(this.$store.state.loginModule.user != null){
         this.$store.dispatch('alarmModule/setUserRecoMeal', this.recentMeal); //store 업뎃
         this.$store.dispatch("alarmModule/getAlarmRecent", this.$store.state.loginModule.user);//action 실행
@@ -88,7 +88,7 @@
     },
     methods: {
       changeAlarmTime: function() { 
-        alert("is changeAlarmTime: " + this.alarmTime);
+        // alert("is changeAlarmTime: " + this.alarmTime);
         //DB 업데이트 
         this.$store.dispatch('loginModule/setUserAlarmTime', this.alarmTime); //store 업뎃
         this.$store.dispatch("loginModule/updateAlarmTime", this.alarmTime); //db업뎃
@@ -114,15 +114,15 @@
         //앱 세팅 
         if(this.alarmState){
           //알람 켠상태
-          alert("is userRecoMeal: " + this.$store.state.alarmModule.userRecoMeal
-          +"is alarmTime : " + this.alarmTime
-          +"is alarmState : " + this.alarmState
-          +"is alarmTime : " + this.$store.state.alarmModule.userRecoMeal
-          +":"+"없음"
-          +":"+this.$store.state.alarmModule.userAlarmImg 
-          +":"+this.$store.state.alarmModule.userGoodFB
-          +":"+this.$store.state.alarmModule.userBadFB
-          );
+          // alert("is userRecoMeal: " + this.$store.state.alarmModule.userRecoMeal
+          // +"is alarmTime : " + this.alarmTime
+          // +"is alarmState : " + this.alarmState
+          // +"is alarmTime : " + this.$store.state.alarmModule.userRecoMeal
+          // +":"+"없음"
+          // +":"+this.$store.state.alarmModule.userAlarmImg 
+          // +":"+this.$store.state.alarmModule.userGoodFB
+          // +":"+this.$store.state.alarmModule.userBadFB
+          // );
           window.MyApp.sendMessage(this.alarmTime.split(':')[0] + "#" + this.alarmTime.split(':')[1] + "#" + this.alarmState + "#" + this.$store.state.alarmModule.userRecoMeal 
           +"#"+"없음"
           +"#"+this.$store.state.alarmModule.userAlarmImg 

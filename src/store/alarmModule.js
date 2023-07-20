@@ -20,7 +20,7 @@ const alarmModule = {
       state.userMealId = payload;
     },
     SET_USER_RECO_MEAL(state, payload) {
-      alert('SET_USER_RECO_MEAL: ', payload)
+      // alert('SET_USER_RECO_MEAL: ', payload)
       state.userRecoMeal = payload;
     },
     SET_USER_RES_OF_AI(state, payload) {

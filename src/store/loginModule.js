@@ -173,12 +173,12 @@ const loginModule = {
         console.log("content: " + response.data["userName"]);
         console.log(state.receiveMessage);
         if(response.data["userName"] != 'null'){
-          alert("updateAlarmTime 완료");
+          // alert("updateAlarmTime 완료");
           //알람 시간 세팅
           commit("SET_ALARM_TIME", response.data["alarmTime"] );
           commit("SET_ALARM_STATE", response.data["alarmState"] );
         }else{
-          alert("updateAlarmTime 실패");
+          // alert("updateAlarmTime 실패");
         }
       });
     },
@@ -199,12 +199,12 @@ const loginModule = {
         console.log("content: " + response.data["userName"]);
         console.log(state.receiveMessage);
         if(response.data["userName"] != 'null'){
-          alert("updateAlarmState 완료");
+          // alert("updateAlarmState 완료");
           //알람 시간 세팅
           commit("SET_ALARM_TIME", response.data["alarmTime"] );
           commit("SET_ALARM_STATE", response.data["alarmState"] );
         }else{
-          alert("updateAlarmState 실패");
+          // alert("updateAlarmState 실패");
         }
       });
     },
@@ -225,7 +225,7 @@ const loginModule = {
         console.log("content: " + response.data["userName"]);
         console.log(state.receiveMessage);
         if(response.data["userName"] != 'null'){
-          alert("updateAlarmState 완료");
+          // alert("updateAlarmState 완료");
           //정보 수정
           commit("SET_MY_ALLERGY", response.data["allergy"] );
           commit("SET_MY_DISEASE", response.data["disease"] );
@@ -233,7 +233,7 @@ const loginModule = {
           commit("SET_ALARM_TIME", response.data["alarmTime"] );
           commit("SET_ALARM_STATE", response.data["alarmState"] );
         }else{
-          alert("updateAlarmState 실패");
+          // alert("updateAlarmState 실패");
         }
       });
     },
