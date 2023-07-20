@@ -80,8 +80,9 @@
       }else{
         this.alarmState = true
       }
-      alert("??? : " + this.$store.state.alarmModule.userRecoMeal)
+      alert("this.$store.state.loginModule.user ??? : " + this.$store.state.loginModule.user + " ??? : " + this.$store.state.alarmModule.userRecoMeal)
       if(this.$store.state.loginModule.user != null){
+        this.$store.dispatch('alarmModule/setUserRecoMeal', this.recentMeal); //store 업뎃
         this.$store.dispatch("alarmModule/getAlarmRecent", this.$store.state.loginModule.user);//action 실행
       }
     },
