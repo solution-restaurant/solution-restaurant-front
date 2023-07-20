@@ -166,7 +166,7 @@
         }
       },
       updateSubmit(){
-        alert("join:" + this.allergySelect   + "  " + this.diseaseSelect);
+        // alert("join:" + this.allergySelect   + "  " + this.diseaseSelect);
         this.$store.dispatch('loginModule/setMyAllergy',this.allergySelect);
         this.$store.dispatch('loginModule/setMyDisease',this.diseaseSelect);
         this.$store.dispatch("loginModule/updateUserInfo");//action 실행

@@ -87,7 +87,7 @@
     },
     mounted() {
       document.addEventListener("vueIncreaseY",function(event) {
-        alert("vueIncreaseY : " + event.detail.data);
+        // alert("vueIncreaseY : " + event.detail.data);
         this.count=event.detail.data
          //음식먹었는지 안먹었는지 업데이트
         this.$store.dispatch('alarmModule/setUserMealId',this.count); //store 업뎃
@@ -95,7 +95,7 @@
         this.$store.dispatch("alarmModule/updateAlarmChkEatY",  this.$store.state.loginModule.user);
       }.bind(this)),
       document.addEventListener("vueIncreaseN",function(event) {
-        alert("this : " + event.detail.data);
+        // alert("this : " + event.detail.data);
         console.log("this : "+ event.detail.data);
         this.count=event.detail.data
          //음식먹었는지 안먹었는지 업데이트
@@ -104,7 +104,7 @@
         this.$store.dispatch("alarmModule/updateAlarmChkEatN",  this.$store.state.loginModule.user);
       }.bind(this)),
       document.addEventListener("alarmOff",function(event) {
-        alert("this : " + event.detail.data );
+        // alert("this : " + event.detail.data );
         console.log("this : "+ event.detail.data);
         event.preventDefault();
         // this.$store.dispatch('loginModule/setUserAlarmState',"N"); //store 업뎃
