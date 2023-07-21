@@ -126,4 +126,89 @@ export default {
   font-size: 12px;
   color: #9c9c9c;
 }
+
+
+/* .popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #6495ED;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 5px;
+    user-select: none;
+}
+
+.popup .popuptext {
+    display: none;
+    min-width: 200px;
+    background-color: #FAEBD7;
+    color: #000;
+    text-align: left;
+    padding: 20px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+    border-radius: 6px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.popup .popuptext .close {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    cursor: pointer;
+    color: #8A2BE2;
+    font-weight: bold;
+} */
+
+.popup-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    color: black;
+    background-color: #e8e3e3;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 16px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+.popup .popuptext {
+    display: none;
+    min-width: 200px;
+    background-color: #FAEBD7;
+    color: #000;
+    text-align: left;
+    padding: 20px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+    border-radius: 6px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.popup .popuptext .close {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    cursor: pointer;
+    color: #8A2BE2;
+    font-weight: bold;
+}
 </style>
